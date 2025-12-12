@@ -367,6 +367,10 @@ static char* get_keylayoutname(int mode, xcb_connection_t* conn) {
     if (mode < 0 || mode > 2) return NULL;
     char *newans = NULL, *newans2 = NULL, *answer = xcb_get_key_group_names(conn);
     int substringStart = 0, substringEnd = 0, size = 0;
+    if (!answer) {
+        fprintf(stderr, "[i3lock] could not get a key group name\n");
+        return NULL;
+    }
     DEBUG("keylayout answer is: [%s]\n", answer);
     switch (mode) {
         case 1:
